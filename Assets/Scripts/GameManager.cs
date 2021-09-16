@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+        SceneManager.sceneLoaded += LoadState;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Resources
@@ -26,10 +28,17 @@ public class GameManager : MonoBehaviour
     // References
     public Player Player;
     // public weapon weapon...
+    public FloatingTextManager floatingTextManager;
 
     // Logic
     public int rubies;
     public int experience;
+
+    // Floating text
+    public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    {
+        floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
+    }
 
     // Save state
     /*
@@ -50,9 +59,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetString("SaveState", s);
     }
 
-    public void LoadState()
+    public void LoadState(Scene s, LoadSceneMode mode)
     {
-        if(!PlayerPrefs.HasKey("SaveState"))
+        if (!PlayerPrefs.HasKey("SaveState"))
             return;
 
         string[] data = PlayerPrefs.GetString("SaveState").Split('|');
