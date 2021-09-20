@@ -13,7 +13,7 @@ public class Chest : Collectable
         {
             collected = true;
             GetComponent<SpriteRenderer>().sprite = emptyChest;
-            GameManager.instance.ShowText("+" + rubiesAmount + " Rubies!", 25, Color.red, transform.position, Vector3.up * 25, 1.5f);
+            GameManager.instance.ShowText("+" + rubiesAmount + " Rubies!", 25, Color.yellow, transform.position, Vector3.up * 25, 1.5f);
         }
     }
 
